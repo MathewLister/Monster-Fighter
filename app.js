@@ -12,38 +12,57 @@ new Vue({
             this.monsterHealth = 100;
         },
         attack: function() {
-            let max = 10;
-            let min = 3;
-            let damage = Math.max(Math.floor(Math.random() * max) + 1, min);
-            this.monsterHealth -= damage;
-            
-            //Check if monster dead
-            if (this.monsterHealth <= 0) {
-                alert('You won!');
-                this.gameIsRunning = false;
+            this.monsterHealth -= this.calculateDamage(3, 10);
+            if (this.checkWin()){
                 return;
             }
-
-            max = 12;
-            min = 5;
-            damage = Math.max(Math.floor(Math.random() * max) + 1, min);
-            this.playerHealth -= damage;
-
-            //Check if player dead
-            if (this.playerHealth <= 0) {
-                alert('You lost!');
-                this.gameIsRunning = false;
-                return;
-            }
+            this.monsterAttacks();
+            this.checkWin();
         },
         specialAttack: function() {
-
+            this.monsterHealth -= this.calculateDamage(10, 20);
+            if (this.checkWin()){
+                return;
+            }
+            this.monsterAttacks();
+            this.checkWin();
         },
         heal: function() {
-
+            if (this.playerHealth <= 90) {
+                this.playerHealth += 10;
+            } else {
+                this.playerHealth = 100;
+            }
+            this.monsterAttacks();
         },
         giveUp: function() {
 
+        },
+        monsterAttacks: function() {
+            this.playerHealth -= this.calculateDamage(5, 12);
+        },
+        calculateDamage: function(min, max) {
+            return Math.max(Math.floor(Math.random() * max) + 1, min);
+        },
+        checkWin: function() {
+             //Check if monster dead
+             if (this.monsterHealth <= 0) {
+                if (confirm('You won! New Game?')) {
+                    this.startGame();
+                } else {
+                    this.gameIsRunning = false;
+                }
+                return true;
+            //Check if payer is dead    
+            } else if (this.playerHealth <= 0) {
+                if (confirm('You lost! New Game?')) {
+                    this.startGame();
+                } else {
+                    this.gameIsRunning = false;
+                }
+                return true;
+            }
+            return false;
         }
     }
-})
+});
