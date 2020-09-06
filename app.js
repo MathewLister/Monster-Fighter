@@ -18,7 +18,7 @@ new Vue({
             this.vaderHealth -= damage;
             this.turns.unshift({
                 isluke: true,
-                text: 'luke hits vader for ' + damage
+                text: 'Luke hits Vader for ' + damage
             });
             if (this.checkWin()){
                 return;
@@ -31,7 +31,7 @@ new Vue({
             this.vaderHealth -= damage
             this.turns.unshift({
                 isluke: true,
-                text: 'luke hits vader hard for ' + damage
+                text: 'Luke hits Vader hard for ' + damage
             });
             if (this.checkWin()){
                 return;
@@ -47,7 +47,7 @@ new Vue({
             }
             this.turns.unshift({
                 isluke: true,
-                text: 'luke heals for 10'
+                text: 'Luke heals for 10'
             });
             this.vaderAttacks();
         },
@@ -59,7 +59,7 @@ new Vue({
             this.lukeHealth -= damage;
             this.turns.unshift({
                 isluke: false,
-                text: 'vader hits vader for ' + damage
+                text: 'Vader hits Luke for ' + damage
             });
         },
         calculateDamage: function(min, max) {
