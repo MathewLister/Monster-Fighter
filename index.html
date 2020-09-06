@@ -10,18 +10,20 @@
 <div id="app">
     <section class="row">
         <div class="small-6 columns">
-            <h1 class="text-center">Luke</h1>
+            <h1 class="text-center">Luke Skywalker</h1>
+            <img src="images/luke.jpg" alt="" class="avatar">
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: blue; margin: 0; color: white;" :style="{width: playerHealth + '%'}">
-                    {{ playerHealth }}
+                <div class="healthbar text-center" style="background: rgb(0,0,0); background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(13,110,210,1) 35%, rgba(15,30,215,1) 100%); margin: 0; color: white;" :style="{width: lukeHealth + '%'}">
+                    {{ lukeHealth }}
                 </div>
             </div>
         </div>
         <div class="small-6 columns">
             <h1 class="text-center">Darth Vader</h1>
+            <img src="images/vader.jpg" alt="" class="avatar">
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: red; margin: 0; color: white;" :style="{width: monsterHealth + '%'}">
-                    {{ monsterHealth }}
+                <div class="healthbar text-center" style="background: rgb(0,0,0); background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(121,9,9,1) 35%, rgba(255,0,44,1) 100%);; margin: 0; color: white;" :style="{width: vaderHealth + '%'}">
+                    {{ vaderHealth }}
                 </div>
             </div>
         </div>
@@ -42,7 +44,7 @@
     <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li v-for="turn in turns" :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+                <li v-for="turn in turns" :class="{'luke-turn': turn.isluke, 'vader-turn': !turn.isluke}">
                     {{ turn.text }}
                 </li>
             </ul>

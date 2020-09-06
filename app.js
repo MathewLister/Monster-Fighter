@@ -1,73 +1,73 @@
 new Vue({
     el: '#app',
     data: {
-        playerHealth: 100,
-        monsterHealth: 100,
+        lukeHealth: 100,
+        vaderHealth: 100,
         gameIsRunning: false,
         turns: []
     },
     methods: {
         startGame: function() {
             this.gameIsRunning = true;
-            this.playerHealth = 100;
-            this.monsterHealth = 100;
+            this.lukeHealth = 100;
+            this.vaderHealth = 100;
             this.turns = [];
         },
         attack: function() {
             let damage = this.calculateDamage(3, 10)
-            this.monsterHealth -= damage;
+            this.vaderHealth -= damage;
             this.turns.unshift({
-                isPlayer: true,
-                text: 'Player hits monster for ' + damage
+                isluke: true,
+                text: 'luke hits vader for ' + damage
             });
             if (this.checkWin()){
                 return;
             }
-            this.monsterAttacks();
+            this.vaderAttacks();
             this.checkWin();
         },
         specialAttack: function() {
             let damage = this.calculateDamage(10, 20);
-            this.monsterHealth -= damage
+            this.vaderHealth -= damage
             this.turns.unshift({
-                isPlayer: true,
-                text: 'Player hits monster hard for ' + damage
+                isluke: true,
+                text: 'luke hits vader hard for ' + damage
             });
             if (this.checkWin()){
                 return;
             }
-            this.monsterAttacks();
+            this.vaderAttacks();
             this.checkWin();
         },
         heal: function() {
-            if (this.playerHealth <= 90) {
-                this.playerHealth += 10;
+            if (this.lukeHealth <= 90) {
+                this.lukeHealth += 10;
             } else {
-                this.playerHealth = 100;
+                this.lukeHealth = 100;
             }
             this.turns.unshift({
-                isPlayer: true,
-                text: 'Player heals for 10'
+                isluke: true,
+                text: 'luke heals for 10'
             });
-            this.monsterAttacks();
+            this.vaderAttacks();
         },
         giveUp: function() {
             this.gameIsRunning = false;
         },
-        monsterAttacks: function() {
+        vaderAttacks: function() {
             let damage = this.calculateDamage(5, 12);
-            this.playerHealth -= damage;
+            this.lukeHealth -= damage;
             this.turns.unshift({
-                isPlayer: false,
-                text: 'Monster hits monster for ' + damage
+                isluke: false,
+                text: 'vader hits vader for ' + damage
             });
         },
         calculateDamage: function(min, max) {
             return Math.max(Math.floor(Math.random() * max) + 1, min);
         },
         checkWin: function() {
-             //Check if monster dead
-             if (this.monsterHealth <= 0) {
+             //Check if vader dead
+             if (this.vaderHealth <= 0) {
                 if (confirm('You won! New Game?')) {
                     this.startGame();
                 } else {
@@ -75,7 +75,7 @@ new Vue({
                 }
                 return true;
             //Check if payer is dead    
-            } else if (this.playerHealth <= 0) {
+            } else if (this.lukeHealth <= 0) {
                 if (confirm('You lost! New Game?')) {
                     this.startGame();
                 } else {
